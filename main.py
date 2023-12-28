@@ -25,6 +25,38 @@ class Fraction: # (рус.: Дробь)
         except ValueError: 
             print('Не удалось конвертировать одно (оба) из чисел в дробное число. Попробуйте ещё раз.')
     
+    # Задать значение числителю
+    @staticmethod
+    def set_numerator(self, number: int | float):
+        """
+        Задать числителю значение {number}
+        
+        :param number: значение, которое требуется задать числителю
+        :type number: int | float
+        """
+
+        try:
+            number = float(number)
+            self.numerator = number
+        except ValueError:
+            print('Не удалось преобразовать число в нужный тип (необходимо: number - int | float). Проверьте написание и попробуйте ещё раз')
+
+    # Задать значение знаменателю
+    @staticmethod
+    def set_denominator(self, number: int | float):
+        """
+        Задать числителю значение {number}
+        
+        :param number: значение, которое требуется задать числителю
+        :type number: int | float
+        """
+
+        try:
+            number = float(number)
+            self.denominator = number
+        except ValueError:
+            print('Не удалось преобразовать число в нужный тип (необходимо: number - int | float). Проверьте написание и попробуйте ещё раз')
+
     # Сложение
     def addition(self, choosen_num: int, number: int | float) -> None:
         """
@@ -132,6 +164,8 @@ class Fraction: # (рус.: Дробь)
             print('Не удалось преобразовать какое-то из чисел в нужный тип (необходимо: choosen_num - int, number - int | float). Проверьте написание и попробуйте ещё раз')
         except ZeroDivisionError:
             print('Не удалось выполнить операцию. На ноль делить нельзя')
+
+
     
 class ConvertTemperature:
     """
@@ -139,7 +173,7 @@ class ConvertTemperature:
     """
 
     # Конвертация градусов Фаренгейта в градусы Цельсия
-    def fahrenheit_to_celsius(self, fahrenheit: int | float) -> int | float:
+    def fahrenheit_to_celsius(self, fahrenheit: int | float) -> float:
         """
         Конвертация градусов Фаренгейта в градусы Цельсия
 
@@ -150,12 +184,13 @@ class ConvertTemperature:
         """
         try:
             fahrenheit = float(fahrenheit) # Преобразуем градусы Фаренгейта в дробное число для выполнения операции
-            return fahrenheit / 33,8 # 1°С = 33,8°F
+            celsius: float = (fahrenheit-32)/1.8
+            return celsius # 1°С = 33,8°F
         except ValueError:
             print('Не удалось преобразовать градусы Фаренгейта в дробное число. Проверьте написание и попробуйте ещё раз')
     
     # Конвертация градусов Цельсия в градусы Фаренгейта
-    def celsius_to_fahrenheit(self, celsius: int | float) -> int | float:
+    def celsius_to_fahrenheit(self, celsius: int | float) -> float:
         """
         Конвертация градусов Цельсия в градусы Фаренгейта
 
@@ -166,7 +201,9 @@ class ConvertTemperature:
         """
         try:
             celsius = float(celsius) # Преобразуем градусы Цельсия в дробное число для выполнения операции
-            return celsius / 33,8 # 1°С = 33,8°F
+            fahrenheit: float = celsius * 1.8 + 32
+            fahrenheit = float(fahrenheit)
+            return fahrenheit # 1°С = 33,8°F
         except ValueError:
             print('Не удалось преобразовать градусы Цельсия в дробное число. Проверьте написание и попробуйте ещё раз')
     
@@ -188,7 +225,7 @@ class ConvertLength:
         
         try:
             km = float(km) # Преобразуем километры в дробное число для выполнения операции
-            return km / 1,61 # 1 миля = 1,61 километра
+            return km / 1.61 # 1 миля = 1,61 километра
         except:
             print('Не удалось преобразовать километры в дробное число. Проверьте написание и попробуйте ещё раз')
     
@@ -205,7 +242,7 @@ class ConvertLength:
 
         try:
             mil = float(mil) # Преобразуем мили в дробное число для выполнения операции
-            return mil / 1,61 # 1 миля = 1,61 километра
+            return mil / 1.61 # 1 миля = 1,61 километра
         except:
             print('Не удалось преобразовать мили в дробное число. Проверьте написание и попробуйте ещё раз')
 
@@ -227,7 +264,7 @@ class ConvertVolume:
         
         try:
             liter = float(liter) # Преобразуем литры в дробное число для выполнения операции
-            return liter / 4,55 # 1 английский галлон = 4,55 литра
+            return liter / 4.55 # 1 английский галлон = 4,55 литра
         except:
             print('Не удалось преобразовать литры в дробное число. Проверьте написание и попробуйте ещё раз')
 
@@ -244,6 +281,31 @@ class ConvertVolume:
 
         try:
             gal = float(gal) # Преобразуем английские галлоны в дробное число для выполнения операции
-            return gal / 4,55 # 1 английский галлон = 4,55 литра
+            return gal / 4.55 # 1 английский галлон = 4,55 литра
         except:
             print('Не удалось преобразовать английские галлоны в дробное число. Проверьте написание и попробуйте ещё раз')
+
+# [ TEST PART ]
+# fr1 = Fraction(4, 8)
+# fr2 = Fraction(1, 2)
+# print(fr1 + fr2)
+
+temp = ConvertTemperature()
+print(temp.celsius_to_fahrenheit(0))
+print(temp.celsius_to_fahrenheit(100))
+print(temp.celsius_to_fahrenheit(-40))
+print(temp.fahrenheit_to_celsius(32))
+print(temp.fahrenheit_to_celsius(212))
+print(temp.fahrenheit_to_celsius(-40))
+print('') # Разделитель
+
+length = ConvertLength()
+print(length.km_to_mil(0))
+print(length.km_to_mil(100))
+print(length.km_to_mil(42.195))
+print(length.mil_to_km(0))
+print(length.mil_to_km(50))
+print(length.mil_to_km(26.2195))
+
+vol = ConvertVolume()
+print(vol.liter_to_gal(0))
